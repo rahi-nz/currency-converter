@@ -13,6 +13,7 @@ body {
 input {
     border: none;
     outline: none;
+    width: 120px;
     font-size: var(--normal-font);
     -moz-appearance:textfield !important;
     font-family: 'Roboto', sans-serif;
@@ -53,7 +54,7 @@ input::-webkit-outer-spin-button {
 }
 
 .input-container {
-    width: 300px;
+    width: 230px;
     height: 100px;
     margin: 50px;
     display: flex;
@@ -103,6 +104,7 @@ footer {
 @media screen and (max-width: 995px) {
     .content {
         flex-direction: column;
+        padding: 20px;
     }
     .switch {
         transform: rotate(90deg);

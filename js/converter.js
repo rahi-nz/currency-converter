@@ -9,7 +9,10 @@ const button = document.querySelector('.switch');
 const API_KEY='0637eda0a8cf0f37de7f1f255eaba1fe';
 const API_URL = `http://data.fixer.io/api/latest?access_key=${API_KEY}`
 
-// get and set local storage
+/**
+ * to make source and target persist
+ * @type {{set: Store.set, get: Store.get}}
+ */
 const Store = {
     set: (key, data) => {
         if (data === undefined) {
@@ -26,6 +29,9 @@ const Store = {
     },
 };
 
+/**
+ * get initial value from local storage
+ */
 window.onload = () => {
     source.value = Store.get("sourceValue");
     targeted.value = Store.get("targetedValue");
@@ -34,6 +40,7 @@ window.onload = () => {
     sourceSymbol.innerHTML = Store.get("sourceSymbol") || "$";
     targetedSymbol.innerHTML = Store.get("targetedSymbol") || "€";
 }
+
 
 const persistSource = () => {
     Store.set("sourceCurrency",sourceCurrency.value);
@@ -47,21 +54,34 @@ const persistTarget = () => {
     Store.set("targetedValue",targeted.value);
 }
 
+/**
+ * reusable function for converting currency value
+ * @param rates
+ */
 const convert = (rates) => {
     targeted.value = (source.value * rates[sourceCurrency.value] / rates[targetedCurrency.value]).toFixed(2);
 }
 
+/**
+ * change inputs data base on options change
+ * @param symbolSelector
+ * @param event
+ * @param rates
+ */
 const selectOnChange = (symbolSelector,event,rates) =>{
     symbolSelector.innerHTML =  event.target.options[event.target.selectedIndex].dataset.symbol;
     convert(rates);
     if(symbolSelector === sourceSymbol) {
         persistSource();
+        Store.set("targetedValue",targeted.value);
     } else {
         persistTarget();
     }
 }
 
-
+/**
+ * call fixer to get latest rate and convert value on select change and input keyup
+ */
 const currency = () => {
     fetch(API_URL).then((response)=> {
         return response.json();
@@ -81,6 +101,10 @@ const currency = () => {
     }).catch(warn => console.warn(warn));
 }
 
+
+/**
+ * swap targeted input with source input
+ */
 const swap = () => {
     [
         targetedCurrency.value,
