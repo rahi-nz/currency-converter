@@ -78,7 +78,7 @@ const currency = () => {
         sourceCurrency.addEventListener('change',(event) => selectOnChange(sourceSymbol,event,rates));
         targetedCurrency.addEventListener('change',(event) => selectOnChange(targetedSymbol,event,rates));
 
-    }).catch(warn => console.log(warn));
+    }).catch(warn => console.warn(warn));
 }
 
 const swap = () => {

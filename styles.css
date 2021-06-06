@@ -1,3 +1,9 @@
+:root {
+    --green: #27CEB5;
+    --big-font: 30px;
+    --normal-font: 20px;
+}
+
 body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
@@ -7,8 +13,9 @@ body {
 input {
     border: none;
     outline: none;
-    font-size: 20px;
+    font-size: var(--normal-font);
     -moz-appearance:textfield !important;
+    font-family: 'Roboto', sans-serif;
 }
 
 input:disabled {
@@ -29,9 +36,9 @@ input::-webkit-outer-spin-button {
 }
 
 .header {
-    background: #29ceb5;
+    background: var(--green);
     color: #FfFfff;
-    font-size: 30px;
+    font-size: var(--big-font);
     font-weight: bold;
     padding: 30px;
     flex: 0 0 auto;
@@ -61,13 +68,13 @@ input::-webkit-outer-spin-button {
 .prefix {
     color: #BFBEBE;
     margin-right: 10px;
-    font-size: 20px;
+    font-size: var(--normal-font);
 }
 
 .currency {
     border: none;
-    color: #27ceb5;
-    font-size: 20px;
+    color: var(--green);
+    font-size: var(--normal-font);
     width: 75px;
 }
 
